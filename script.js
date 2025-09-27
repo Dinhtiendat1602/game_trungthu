@@ -51,7 +51,7 @@ gameArea.addEventListener("mousemove", (e) => {
   player.style.left = Math.max(0, Math.min(x, maxX)) + "px";
 });
 
-// Tạo vật phẩm rơi
+// Tạo vật phẩm rơi (bánh, bom hoặc người yêu)
 function createItem() {
   if (!isGameRunning || gameOver) return;
 
@@ -59,10 +59,13 @@ function createItem() {
   let itemType;
 
   if (random < 0.09) {
+    // 5% cơ hội là người yêu (hiếm)
     itemType = "girlfriend";
   } else if (random < 0.35) {
+    // 30% cơ hội là bom
     itemType = "bomb";
   } else {
+    // 65% cơ hội là bánh
     itemType = "cake";
   }
 
@@ -75,7 +78,11 @@ function createItem() {
 
   gameArea.appendChild(item);
 
-  let fallSpeed = itemType === "girlfriend" ? 1 + Math.random() * 2 : 2 + Math.random() * 5;
+  // Animation rơi (người yêu rơi chậm hơn)
+  let fallSpeed =
+    itemType === "girlfriend"
+      ? 1 + Math.random() * 2 // Người yêu rơi chậm
+      : 2 + Math.random() * 5; // Bánh và bom rơi nhanh hơn
 
   const fallInterval = setInterval(() => {
     if (!isGameRunning || gameOver) {
@@ -87,6 +94,7 @@ function createItem() {
     const currentTop = parseFloat(item.style.top);
     item.style.top = currentTop + fallSpeed + "px";
 
+    // Kiểm tra va chạm
     if (checkCollision(player, item)) {
       if (itemType === "bomb") {
         hitBomb(item);
@@ -100,9 +108,11 @@ function createItem() {
       }
     }
 
+    // Xóa vật phẩm nếu ra khỏi màn hình
     if (currentTop > gameArea.offsetHeight) {
       clearInterval(fallInterval);
       item.remove();
+      // Nếu là bom và tránh được thì tính điểm
       if (itemType === "bomb") {
         bombsAvoided++;
         bombsDisplay.textContent = bombsAvoided;
@@ -131,6 +141,7 @@ function collectCake(cake) {
   cakesCollected++;
   scoreDisplay.textContent = score;
   cakesDisplay.textContent = cakesCollected;
+
   showFloatingText("+10", "#ffd700", player.style.left);
 }
 
@@ -144,12 +155,14 @@ function findGirlfriend(girlfriend) {
   scoreDisplay.textContent = score;
   girlfriendsDisplay.textContent = girlfriendsFound;
 
+  // Hiệu ứng tình yêu
   const loveEffect = document.createElement("div");
   loveEffect.className = "love-effect";
   loveEffect.style.left = player.style.left;
   loveEffect.style.top = player.style.top;
   gameArea.appendChild(loveEffect);
 
+  // Thông báo đặc biệt
   showLoveMessage("💖 TRUNG THU NÀY CÓ NGƯỜI YÊU RỒI! 💖");
   showFloatingText("+50", "#ff69b4", player.style.left);
 
@@ -168,57 +181,59 @@ function showLoveMessage(text) {
   loveMsg.style.animation = "floatUp 3s ease-out forwards";
 
   gameArea.appendChild(loveMsg);
-  setTimeout(() => loveMsg.remove(), 3000);
+  setTimeout(() => loveMsg.remove(), 5000);
 }
 
-// Hiển thị text bay lên
-function showFloatingText(text, color, x) {
-  const floatingText = document.createElement("div");
-  floatingText.textContent = text;
-  floatingText.style.position = "absolute";
-  floatingText.style.left = x;
-  floatingText.style.bottom = "120px";
-  floatingText.style.color = color;
-  floatingText.style.fontSize = "24px";
-  floatingText.style.fontWeight = "bold";
-  floatingText.style.pointerEvents = "none";
-  floatingText.style.animation = "floatUp 2s ease-out forwards";
-  floatingText.style.zIndex = "10";
-
-  gameArea.appendChild(floatingText);
-  setTimeout(() => floatingText.remove(), 2000);
-}
-
-// Chạm bom
+// Trúng bom
 function hitBomb(bomb) {
-  bomb.remove();
   gameOver = true;
 
+  // Hiệu ứng nổ
   const explosion = document.createElement("div");
   explosion.className = "explosion";
-  explosion.style.left = player.style.left;
-  explosion.style.top = player.style.top;
+  explosion.style.left = bomb.style.left;
+  explosion.style.top = bomb.style.top;
   gameArea.appendChild(explosion);
 
-  setTimeout(() => {
-    explosion.remove();
-  }, 500);
+  bomb.remove();
 
-  endGame(true);
+  // Dừng game sau 0.5 giây
+  setTimeout(() => {
+    endGame(true);
+  }, 500);
+}
+
+// Hiển thị văn bản nổi
+function showFloatingText(text, color, left) {
+  const points = document.createElement("div");
+  points.textContent = text;
+  points.style.position = "absolute";
+  points.style.color = color;
+  points.style.fontSize = "20px";
+  points.style.fontWeight = "bold";
+  points.style.left = left;
+  points.style.top = parseInt(player.style.top) - 30 + "px";
+  points.style.animation = "floatUp 1s ease-out forwards";
+  points.style.zIndex = "5";
+
+  gameArea.appendChild(points);
+  setTimeout(() => points.remove(), 1000);
 }
 
 // Bắt đầu game
+startBtn.addEventListener("click", startGame);
+
 function startGame() {
   if (isGameRunning) return;
 
+  isGameRunning = true;
+  gameOver = false;
+  hasGirlfriend = false;
   score = 0;
   cakesCollected = 0;
   bombsAvoided = 0;
   girlfriendsFound = 0;
   timeLeft = 60;
-  gameOver = false;
-  hasGirlfriend = false;
-  isGameRunning = true;
 
   scoreDisplay.textContent = score;
   cakesDisplay.textContent = cakesCollected;
@@ -226,13 +241,10 @@ function startGame() {
   girlfriendsDisplay.textContent = girlfriendsFound;
   timerDisplay.textContent = timeLeft;
 
-  player.style.left = gameArea.offsetWidth / 2 - player.offsetWidth / 2 + "px";
-
-  const oldItems = gameArea.querySelectorAll(".cake, .bomb, .girlfriend, .explosion, .love-effect, .mini-message");
-  oldItems.forEach(item => item.remove());
-
+  // Tạo vật phẩm mỗi 0.8 giây
   itemInterval = setInterval(createItem, 800);
 
+  // Đếm ngược thời gian
   gameInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = timeLeft;
@@ -241,76 +253,55 @@ function startGame() {
       endGame(false);
     }
   }, 1000);
-
-  startBtn.textContent = "Đang Chơi...";
-  startBtn.disabled = true;
 }
 
 // Kết thúc game
-function endGame(bombed = false) {
+endBtn.addEventListener("click", () => endGame(false));
+
+function endGame(isBombGameOver) {
   isGameRunning = false;
+  gameOver = true;
   clearInterval(gameInterval);
   clearInterval(itemInterval);
 
-  finalScore.textContent = score + " điểm";
-
-  if (bombed) {
-    messageTitle.textContent = "💥 GAME OVER! 💥";
-    messageTitle.className = "game-over";
-    messageText.textContent = "Bạn đã chạm phải bom! Hãy cẩn thận hơn nhé!";
+  // Hiển thị thông điệp phù hợp
+  if (isBombGameOver) {
+    messageTitle.innerHTML = '💥 <span class="game-over">Game Over!</span> 💥';
+    messageText.textContent = "Ôi không! Bạn đã trúng bom!";
   } else {
-    messageTitle.textContent = "🎉 Chúc Mừng Trung Thu! 🥮";
-    messageTitle.className = "";
-    
-    if (score >= 300) {
-      messageText.textContent = "Xuất sắc! Bạn là cao thủ hái bánh!";
-    } else if (score >= 200) {
-      messageText.textContent = "Tuyệt vời! Thành tích rất ấn tượng!";
-    } else if (score >= 100) {
-      messageText.textContent = "Khá tốt! Bạn đã có một trung thu vui vẻ!";
-    } else {
-      messageText.textContent = "Không sao, lần sau sẽ tốt hơn!";
-    }
+    messageTitle.innerHTML = "🎉 Chúc Mừng Trung Thu! 🥮";
+    messageText.textContent = "Thành tích của bạn thật tuyệt vời!";
   }
 
+  // Thông báo tình trạng tình yêu
   if (hasGirlfriend) {
-    loveStatus.textContent = "💖 Trung thu này có người yêu rồi! Hạnh phúc quá!";
-    loveStatus.className = "love-message";
+    loveStatus.innerHTML =
+      '💖 <span class="love-message">Trung thu này có người yêu rồi! Yay!</span> 💖';
   } else {
-    loveStatus.textContent = "💔 Trung thu này vẫn còn đơn phương...";
-    loveStatus.className = "";
+    loveStatus.innerHTML = "💔 Trung thu này vẫn còn đơn phương...";
   }
 
+  finalScore.textContent = score + " điểm";
   messageOverlay.style.display = "flex";
 
-  startBtn.textContent = "Bắt Đầu Game";
-  startBtn.disabled = false;
+  // Xóa tất cả vật phẩm còn lại
+  document
+    .querySelectorAll(".cake, .bomb, .girlfriend")
+    .forEach((item) => item.remove());
 }
 
-// Event listeners
-startBtn.addEventListener("click", startGame);
-endBtn.addEventListener("click", () => {
-  if (isGameRunning) {
-    endGame(false);
-  }
-});
-
-// Thêm CSS animation
-const style = document.createElement('style');
+// Thêm CSS cho hiệu ứng
+const style = document.createElement("style");
 style.textContent = `
-  @keyframes floatUp {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-100px);
-    }
-  }
-`;
+            @keyframes floatUp {
+                0% { transform: translateY(0); opacity: 1; }
+                100% { transform: translateY(-50px); opacity: 0; }
+            }
+        `;
 document.head.appendChild(style);
 
 // Khởi tạo game
 createStars();
+
+// Đặt vị trí player ban đầu
 player.style.left = gameArea.offsetWidth / 2 - player.offsetWidth / 2 + "px";

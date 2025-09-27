@@ -20,6 +20,20 @@ body {
   text-align: center;
 }
 
+/* Responsive cho container */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
+  }
+}
+
 .header {
   margin-bottom: 20px;
 }
@@ -31,6 +45,21 @@ body {
   margin-bottom: 10px;
 }
 
+/* Responsive cho tiêu đề */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 1.6em;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+  }
+}
+
 .game-info {
   display: flex;
   justify-content: space-around;
@@ -39,11 +68,38 @@ body {
   padding: 15px;
   border-radius: 10px;
   border: 1px solid rgba(255, 215, 0, 0.3);
-  flex-wrap: wrap;
+}
+
+/* Responsive cho game info */
+@media (max-width: 768px) {
+  .game-info {
+    padding: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-info {
+    padding: 8px;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
 }
 
 .info-box {
   text-align: center;
+  flex: 1;
+  min-width: 80px;
+}
+
+@media (max-width: 480px) {
+  .info-box {
+    min-width: 70px;
+    flex: none;
+    width: calc(50% - 10px);
+  }
 }
 
 .info-label {
@@ -52,10 +108,35 @@ body {
   margin-bottom: 5px;
 }
 
+@media (max-width: 768px) {
+  .info-label {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-label {
+    font-size: 0.7em;
+    margin-bottom: 3px;
+  }
+}
+
 .info-value {
   font-size: 1.5em;
   font-weight: bold;
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .info-value {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-value {
+    font-size: 1em;
+  }
 }
 
 .game-area {
@@ -69,6 +150,29 @@ body {
   margin-bottom: 20px;
 }
 
+/* Responsive cho game area */
+@media (max-width: 768px) {
+  .game-area {
+    height: 400px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-area {
+    height: 300px;
+    margin-bottom: 10px;
+    border-width: 1px;
+  }
+}
+
+@media (max-height: 600px) {
+  .game-area {
+    height: 60vh;
+    max-height: 350px;
+  }
+}
+
 #moon {
   position: absolute;
   top: 50px;
@@ -79,6 +183,25 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 30px #ffd700;
   animation: moonGlow 3s ease-in-out infinite alternate;
+}
+
+/* Responsive cho mặt trăng */
+@media (max-width: 768px) {
+  #moon {
+    width: 60px;
+    height: 60px;
+    top: 30px;
+    right: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  #moon {
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    right: 20px;
+  }
 }
 
 @keyframes moonGlow {
@@ -111,6 +234,33 @@ body {
   font-size: 20px;
 }
 
+/* Responsive cho player */
+@media (max-width: 768px) {
+  .player {
+    width: 50px;
+    height: 65px;
+    bottom: 15px;
+  }
+  
+  .player::before {
+    font-size: 16px;
+    top: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .player {
+    width: 40px;
+    height: 50px;
+    bottom: 10px;
+  }
+  
+  .player::before {
+    font-size: 14px;
+    top: -6px;
+  }
+}
+
 .cake {
   position: absolute;
   width: 40px;
@@ -129,6 +279,29 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 24px;
+}
+
+/* Responsive cho bánh */
+@media (max-width: 768px) {
+  .cake {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .cake::before {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cake {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .cake::before {
+    font-size: 18px;
+  }
 }
 
 .bomb {
@@ -151,6 +324,29 @@ body {
   font-size: 28px;
 }
 
+/* Responsive cho bom */
+@media (max-width: 768px) {
+  .bomb {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .bomb::before {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bomb {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .bomb::before {
+    font-size: 20px;
+  }
+}
+
 .girlfriend {
   position: absolute;
   width: 50px;
@@ -169,6 +365,29 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
+}
+
+/* Responsive cho người yêu */
+@media (max-width: 768px) {
+  .girlfriend {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .girlfriend::before {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .girlfriend {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .girlfriend::before {
+    font-size: 22px;
+  }
 }
 
 @keyframes heartBeat {
@@ -208,6 +427,21 @@ body {
   justify-content: center;
 }
 
+/* Responsive cho controls */
+@media (max-width: 768px) {
+  .controls {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .controls {
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 button {
   padding: 12px 30px;
   font-size: 1.1em;
@@ -218,11 +452,31 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+  min-width: 140px;
 }
 
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+}
+
+/* Responsive cho button */
+@media (max-width: 768px) {
+  button {
+    padding: 10px 25px;
+    font-size: 1em;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  button {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    min-width: 100px;
+    width: 80%;
+    max-width: 200px;
+  }
 }
 
 #endBtn {
@@ -240,6 +494,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 20px;
 }
 
 .message-content {
@@ -251,6 +506,26 @@ button:hover {
   box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
   max-width: 500px;
   animation: messagePop 0.5s ease-out;
+  width: 90%;
+}
+
+/* Responsive cho message */
+@media (max-width: 768px) {
+  .message-content {
+    padding: 30px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-content {
+    padding: 20px;
+    max-width: 300px;
+  }
+  
+  .message-overlay {
+    padding: 10px;
+  }
 }
 
 @keyframes messagePop {
@@ -271,11 +546,42 @@ button:hover {
   text-shadow: 0 0 10px #ff6b00;
 }
 
+/* Responsive cho tiêu đề message */
+@media (max-width: 768px) {
+  .message-content h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-content h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+}
+
 .message-content p {
   font-size: 1.2em;
   line-height: 1.6;
   margin-bottom: 10px;
   color: #fff;
+}
+
+/* Responsive cho text message */
+@media (max-width: 768px) {
+  .message-content p {
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-content p {
+    font-size: 1em;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
 }
 
 .final-score {
@@ -284,6 +590,21 @@ button:hover {
   font-weight: bold;
   margin: 20px 0;
   text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+}
+
+/* Responsive cho final score */
+@media (max-width: 768px) {
+  .final-score {
+    font-size: 2.5em;
+    margin: 15px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .final-score {
+    font-size: 2em;
+    margin: 10px 0;
+  }
 }
 
 .game-over {
@@ -344,6 +665,21 @@ button:hover {
   pointer-events: none;
 }
 
+/* Responsive cho hiệu ứng nổ */
+@media (max-width: 768px) {
+  .explosion {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explosion {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 @keyframes explode {
   0% {
     transform: scale(0.1);
@@ -368,6 +704,21 @@ button:hover {
   animation: loveExplode 1s ease-out forwards;
   z-index: 100;
   pointer-events: none;
+}
+
+/* Responsive cho hiệu ứng tình yêu */
+@media (max-width: 768px) {
+  .love-effect {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .love-effect {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 @keyframes loveExplode {
@@ -399,85 +750,58 @@ button:hover {
   white-space: nowrap;
 }
 
-/* Responsive Design */
+/* Responsive cho mini message */
 @media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-  
-  .header h1 {
-    font-size: 1.5em;
-  }
-  
-  .game-info {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .info-box {
-    flex: 1;
-    min-width: 80px;
-  }
-  
-  .info-label {
-    font-size: 0.8em;
-  }
-  
-  .info-value {
-    font-size: 1.2em;
-  }
-  
-  .game-area {
-    height: 400px;
-  }
-  
-  .controls {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 15px;
-  }
-  
-  .message-content {
-    margin: 20px;
-    padding: 20px;
-  }
-  
-  .message-content h2 {
-    font-size: 1.8em;
-  }
-  
-  .final-score {
-    font-size: 2em;
+  .mini-message {
+    font-size: 0.9em;
+    padding: 8px 12px;
+    margin-top: 80px;
   }
 }
 
 @media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.2em;
+  .mini-message {
+    font-size: 0.8em;
+    padding: 6px 10px;
+    margin-top: 60px;
+  }
+}
+
+/* Thêm hiệu ứng floatUp nếu chưa có */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
+/* Orientation cảnh báo cho mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container::before {
+    content: "Xoay ngang màn hình để có trải nghiệm chơi game tốt hơn!";
+    display: block;
+    background: #ff6b00;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+}
+
+/* Touch improvements for mobile */
+@media (max-width: 768px) {
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
   
   .game-area {
-    height: 300px;
-  }
-  
-  .player {
-    width: 40px;
-    height: 60px;
-  }
-  
-  .cake, .bomb, .girlfriend {
-    width: 30px;
-    height: 30px;
-  }
-  
-  #moon {
-    width: 60px;
-    height: 60px;
-    top: 30px;
-    right: 30px;
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
