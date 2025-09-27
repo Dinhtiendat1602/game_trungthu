@@ -1,0 +1,399 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+      body {
+        background: linear-gradient(180deg, #0a0a2a 0%, #1a1a4a 100%);
+        color: white;
+        font-family: "Arial", sans-serif;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        color: #ffd700;
+        font-size: 2em;
+        text-shadow: 0 0 10px #ff6b00;
+        margin-bottom: 10px;
+      }
+
+      .game-info {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+      }
+
+      .info-box {
+        text-align: center;
+      }
+
+      .info-label {
+        font-size: 0.9em;
+        color: #ffd700;
+        margin-bottom: 5px;
+      }
+
+      .info-value {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .game-area {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid rgba(255, 215, 0, 0.5);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      #moon {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle at 30% 30%, #fff 0%, #ffd700 70%);
+        border-radius: 50%;
+        box-shadow: 0 0 30px #ffd700;
+        animation: moonGlow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes moonGlow {
+        from {
+          box-shadow: 0 0 30px #ffd700;
+        }
+        to {
+          box-shadow: 0 0 50px #ff6b00, 0 0 70px #ffd700;
+        }
+      }
+
+      .player {
+        position: absolute;
+        bottom: 20px;
+        width: 60px;
+        height: 80px;
+        background: linear-gradient(45deg, #4a90e2, #7b68ee);
+        border-radius: 50% 50% 0 0;
+        transition: all 0.1s ease;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .player::before {
+        content: "🌙";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+      }
+
+      .cake {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle, #ff6b00, #ff8c00);
+        border-radius: 50%;
+        box-shadow: 0 0 10px #ff4500;
+        animation: cakeGlow 2s ease-in-out infinite alternate;
+        z-index: 2;
+      }
+
+      .cake::before {
+        content: "🥮";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+      }
+
+      .bomb {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        background: radial-gradient(circle, #ff0000, #8b0000);
+        border-radius: 50%;
+        box-shadow: 0 0 15px #ff0000;
+        animation: bombDanger 1s ease-in-out infinite alternate;
+        z-index: 2;
+      }
+
+      .bomb::before {
+        content: "💣";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 28px;
+      }
+
+      .girlfriend {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: radial-gradient(circle, #ff69b4, #ff1493);
+        border-radius: 50%;
+        box-shadow: 0 0 20px #ff69b4;
+        animation: heartBeat 1.5s ease-in-out infinite alternate;
+        z-index: 2;
+      }
+
+      .girlfriend::before {
+        content: "💖";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+      }
+
+      @keyframes heartBeat {
+        from {
+          transform: scale(1);
+          box-shadow: 0 0 20px #ff69b4;
+        }
+        to {
+          transform: scale(1.2);
+          box-shadow: 0 0 30px #ff1493, 0 0 40px #ff69b4;
+        }
+      }
+
+      @keyframes bombDanger {
+        from {
+          transform: scale(1) rotate(0deg);
+          box-shadow: 0 0 15px #ff0000;
+        }
+        to {
+          transform: scale(1.2) rotate(10deg);
+          box-shadow: 0 0 25px #ffff00, 0 0 15px #ff0000;
+        }
+      }
+
+      @keyframes cakeGlow {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.1);
+        }
+      }
+
+      .controls {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      button {
+        padding: 12px 30px;
+        font-size: 1.1em;
+        background: linear-gradient(45deg, #ff6b00, #ff8c00);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+      }
+
+      #endBtn {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      }
+
+      .message-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .message-content {
+        background: linear-gradient(135deg, #1a1a4a, #0a0a2a);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        border: 2px solid #ffd700;
+        box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+        max-width: 500px;
+        animation: messagePop 0.5s ease-out;
+      }
+
+      @keyframes messagePop {
+        from {
+          opacity: 0;
+          transform: scale(0.5) translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .message-content h2 {
+        color: #ffd700;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ff6b00;
+      }
+
+      .message-content p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .final-score {
+        font-size: 3em;
+        color: #ff6b00;
+        font-weight: bold;
+        margin: 20px 0;
+        text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+      }
+
+      .game-over {
+        color: #ff4444 !important;
+        font-size: 1.2em !important;
+        text-shadow: 0 0 10px #ff0000 !important;
+      }
+
+      .love-message {
+        color: #ff69b4 !important;
+        font-size: 1em !important;
+        text-shadow: 0 0 10px #ff1493 !important;
+        animation: lovePulse 2s infinite;
+      }
+
+      @keyframes lovePulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .stars {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 5s infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .explosion {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, #ffff00, #ff0000);
+        border-radius: 50%;
+        animation: explode 0.5s ease-out forwards;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: scale(0.1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      .love-effect {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, #ff69b4, transparent);
+        border-radius: 50%;
+        animation: loveExplode 1s ease-out forwards;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      @keyframes loveExplode {
+        0% {
+          transform: scale(0.1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.2);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .mini-message {
+        position: absolute;
+        background: rgba(255, 105, 180, 0.9);
+        color: white;
+        margin-top: 100px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 1em;
+        font-weight: bold;
+        animation: floatUp 2s ease-out forwards;
+        z-index: 5;
+        white-space: nowrap;
+      }
