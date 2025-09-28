@@ -1,75 +1,66 @@
 <!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Game Hái Bánh Trung Thu</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <div class="stars" id="stars"></div>
-
+    
     <div class="container">
-      <div class="header">
-        <h1>🎮 Game Hái Bánh Trung Thu cho Đạt 🥮</h1>
-        <p>
-          Hứng bánh (+10đ) - Tránh bom (Game Over) - Tìm người yêu (+50đ & đặc
-          biệt)!
-        </p>
-      </div>
+        <div class="header">
+            <h1>🎮 Game Hái Bánh Trung Thu cho Đạt 🥮</h1>
+            <p>Hứng bánh (+10đ) - Tránh bom (Game Over) - Tìm người yêu (+50đ)!</p>
+        </div>
 
-      <div class="game-info">
-        <div class="info-box">
-          <div class="info-label">Điểm Số</div>
-          <div class="info-value" id="score">0</div>
+        <div class="game-info">
+            <div class="info-box">
+                <div class="info-label">Điểm Số</div>
+                <div class="info-value" id="score">0</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">Bánh Đã Hái</div>
+                <div class="info-value" id="cakesCollected">0</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">Bom Đã Tránh</div>
+                <div class="info-value" id="bombsAvoided">0</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">Người Yêu</div>
+                <div class="info-value" id="girlfriendsFound">0</div>
+            </div>
+            <div class="info-box">
+                <div class="info-label">Thời Gian</div>
+                <div class="info-value" id="timer">60</div>
+            </div>
         </div>
-        <div class="info-box">
-          <div class="info-label">Bánh Đã Hái</div>
-          <div class="info-value" id="cakesCollected">0</div>
-        </div>
-        <div class="info-box">
-          <div class="info-label">Bom Đã Tránh</div>
-          <div class="info-value" id="bombsAvoided">0</div>
-        </div>
-        <div class="info-box">
-          <div class="info-label">Người Yêu</div>
-          <div class="info-value" id="girlfriendsFound">0</div>
-        </div>
-        <div class="info-box">
-          <div class="info-label">Thời Gian</div>
-          <div class="info-value" id="timer">60</div>
-        </div>
-      </div>
 
-      <div class="game-area" id="gameArea">
-        <div id="moon"></div>
-        <div class="player" id="player"></div>
-        <!-- Vật phẩm sẽ được tạo bằng JavaScript -->
-      </div>
+        <div class="game-area" id="gameArea">
+            <div id="moon"></div>
+            <div class="player" id="player"></div>
+        </div>
 
-      <div class="controls">
-        <button id="startBtn">Bắt Đầu Game</button>
-        <button id="endBtn">Kết Thúc</button>
-      </div>
+        <div class="controls">
+            <button id="startBtn">Bắt Đầu Game</button>
+            <button id="endBtn">Kết Thúc</button>
+        </div>
     </div>
 
     <div class="message-overlay" id="messageOverlay">
-      <div class="message-content">
-        <h2 id="messageTitle">🎉 Chúc Mừng Trung Thu! 🥮</h2>
-        <div class="final-score" id="finalScore">0 điểm</div>
-        <p id="messageText">Thành tích của bạn thật tuyệt vời!</p>
-        <p id="loveStatus">💔 Trung thu này vẫn còn đơn phương...</p>
-        <p>Chúc bạn và gia đình một mùa Trung Thu:</p>
-        <p>
-          💫 An lành - Hạnh phúc - Sum vầy 💫 <br />Và đừng quên ib cho
-          <i class="dat" style="color: #e5b990; font-weight: bold">Đạt</i> để
-          nhận bánh trung thu nha!
-        </p>
-        <button onclick="location.reload()" style="margin-top: 20px">
-          Chơi Lại
-        </button>
-      </div>
+        <div class="message-content">
+            <h2 id="messageTitle">🎉 Chúc Mừng Trung Thu! 🥮</h2>
+            <div class="final-score" id="finalScore">0 điểm</div>
+            <p id="messageText">Thành tích của bạn thật tuyệt vời!</p>
+            <p id="loveStatus">💔 Trung thu này vẫn còn đơn phương...</p>
+            <p>Chúc bạn và gia đình một mùa Trung Thu:</p>
+            <p>💫 An lành - Hạnh phúc - Sum vầy 💫Và đừng quên ib cho <i class="dat" style="color: rgb(89, 222, 68);">Đạt </i>để nhận bánh nha! </p>
+            <button onclick="location.reload()" class="restart-btn">Chơi Lại</button>
+        </div>
     </div>
+
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

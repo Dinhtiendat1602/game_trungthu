@@ -305,3 +305,4 @@ createStars();
 
 // Đặt vị trí player ban đầu
 player.style.left = gameArea.offsetWidth / 2 - player.offsetWidth / 2 + "px";
+// di chuyển chs trên smartphone
